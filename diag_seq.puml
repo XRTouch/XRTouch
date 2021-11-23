@@ -1,0 +1,36 @@
+@startuml diag_seq
+title Diagramme de sequence
+
+actor Ciseaux as user
+participant XRTouch as xr
+actor Application as app
+
+activate user
+    user -> xr: setAngle()
+    activate xr
+        xr --> user
+    deactivate xr
+deactivate user
+
+activate app
+    app -> xr : getAngle
+    activate xr
+        xr --> app: angle
+    deactivate xr
+deactivate app
+
+activate user
+    user -> xr: getForce()
+    activate xr
+        xr --> user: force
+    deactivate xr
+deactivate user
+
+activate app
+    app -> xr: setForce()
+    activate xr
+        xr --> app
+    deactivate xr
+deactivate app
+
+@enduml

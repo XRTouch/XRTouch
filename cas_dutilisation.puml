@@ -1,0 +1,21 @@
+@startuml cas_dutilisations
+title Cas d'utilisations
+
+left to right direction
+
+actor Application as app
+actor Ciseaux as user
+
+package XRTouch {
+    usecase "changer la force de retour" as hapticSend
+    usecase "recuperer la force de retour" as hapticRecv
+    usecase "changer l'angle des ciseaux" as actionSend
+    usecase "recuperer l'angle des ciseaux" as actionRecv
+}
+
+app -[#red]> hapticSend
+app -[#red]> actionRecv
+user -[#blue]> actionSend
+user -[#blue]> hapticRecv
+
+@enduml
