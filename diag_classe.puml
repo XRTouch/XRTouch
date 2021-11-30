@@ -1,0 +1,46 @@
+@startuml diag_class
+title Diagramme de classe
+
+Interface Appareil {
+    position: Position
+    forceRetour: Force
+    ---
+    calibrerAppareil()
+    setForceRetour(f: Force)
+    getPosition(): Position
+}
+
+class Ciseaux {
+    angle: float
+    ---
+    getAngle(): Float
+    setForce(f: Float)
+}
+
+class XRTouch {
+    ---
+    setForce(f: Force)
+    getForce(): Force
+    setPosition(p: Position)
+    getPosition(): Position
+    ajouterAppareil(a: Appareil)
+    retirerAppareil(a: Appareil)
+    ajouterApplication(a: Application)
+    retirerApplication(a: Application)
+    afficherErreur(err: String)
+}
+
+class DriverApplication {
+    nomApplication: String
+    cible: Application
+    ---
+    connecterApplication(a: Application)
+    envoyerInfo(i: Info)
+    attendreInfoRetour(): Info
+}
+
+Ciseaux --|> Appareil
+XRTouch "1" --> "0..*" Appareil: appareils
+XRTouch "1" --> "0..*" DriverApplication: applications
+
+@enduml

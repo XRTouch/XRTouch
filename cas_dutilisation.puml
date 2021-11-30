@@ -4,13 +4,13 @@ title Cas d'utilisations
 left to right direction
 
 actor Application as app
-actor Ciseaux as user
+actor Appareil as user
 
 package XRTouch {
     usecase "changer la force de retour" as hapticSend
     usecase "recuperer la force de retour" as hapticRecv
-    usecase "changer l'angle des ciseaux" as actionSend
-    usecase "recuperer l'angle des ciseaux" as actionRecv
+    usecase "changer la position de l'appareil" as actionSend
+    usecase "recuperer la position de l'appareil" as actionRecv
 }
 
 app -[#red]> hapticSend

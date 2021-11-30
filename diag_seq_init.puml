@@ -1,0 +1,35 @@
+@startuml diag_seq
+title Diagramme de sequence : initialisation
+
+actor Utilisateur as user
+actor "apr: Appareil" as apr
+participant XRTouch as xr
+participant "dri: DriverApplication" as dri
+
+
+user -> xr : initialiser()
+activate xr
+    xr --> user
+deactivate xr
+user -> xr : ajouterAppareil(apr)
+activate xr
+    xr -> apr : calibrerAppareil()
+    activate apr
+        apr --> xr
+    deactivate apr
+    xr --> user
+deactivate xr
+user -> xr : ajouterApplication(apl)
+activate xr
+    xr -> xr: creerDriver(apl)
+    activate xr
+        xr --> xr: dri
+    deactivate xr
+    xr --> user
+    xr -> dri: connecterApplication(apl)
+    activate dri
+        dri --> xr
+    deactivate dri
+deactivate xr
+
+@enduml

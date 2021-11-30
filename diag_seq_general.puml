@@ -1,0 +1,58 @@
+@startuml diag_seq
+title Diagramme de sequence : utilisation generale
+
+actor Appareil as user
+participant XRTouch as xr
+participant DriverApplication as drApp
+actor Application as app
+
+activate user
+    user -> xr: setPosition(position)
+    activate xr
+        xr --> user
+    deactivate xr
+deactivate user
+
+activate drApp
+    drApp -> xr : getPosition
+    activate xr
+        xr --> drApp: position
+        drApp -> app: envoyerInfo()
+        activate app
+            app --> drApp: estEnvoyé
+        deactivate app
+        alt non estEnvoyé
+            drApp -> xr: afficherErreur("Informations non envoyés")
+            activate xr
+                xr --> drApp
+            deactivate xr 
+        end
+    deactivate xr
+deactivate drApp
+
+activate user
+    user -> xr: getForceRetour()
+    activate xr
+        xr --> user: forceRetour
+    deactivate xr
+deactivate user
+
+activate drApp
+    drApp -> app: attendreInfo()
+    activate app
+        app --> drApp: informations
+    deactivate app
+    alt informations valides
+        drApp -> xr: setForceRetour(force)
+        activate xr
+            xr --> drApp
+        deactivate xr
+    else informations non valides
+        drApp -> xr: afficherErreur("Informations invalides")
+        activate xr
+            xr --> drApp
+        deactivate xr 
+    end
+deactivate drApp
+
+@enduml
