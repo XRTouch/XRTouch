@@ -31,16 +31,26 @@ class XRTouch {
 }
 
 class DriverApplication {
-    nomApplication: String
-    cible: Application
+    nomDriver: String
     ---
     connecterApplication(a: Application)
     envoyerInfo(i: Info)
     attendreInfoRetour(): Info
 }
 
+class Application {
+    nomApplication: String
+    ---
+}
+
+class SiteWeb {
+    
+}
+
 Ciseaux --|> Appareil
 XRTouch "1" --> "0..*" Appareil: appareils
 XRTouch "1" --> "0..*" DriverApplication: applications
+DriverApplication "1" --> "1" Application: cible
+SiteWeb --|> Application
 
 @enduml
